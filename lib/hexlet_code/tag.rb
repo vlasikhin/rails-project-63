@@ -16,7 +16,7 @@ module HexletCode
       content = @body ? @body.call : ""
 
       if empty_tags.include?(@name)
-        "<#{@name}#{attributes} />"
+        "<#{@name}#{attributes}>"
       else
         "<#{@name}#{attributes}>#{content}</#{@name}>"
       end

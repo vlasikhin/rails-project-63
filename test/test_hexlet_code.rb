@@ -24,4 +24,28 @@ class TestHexletCode < Minitest::Test
   def test_form_tag_with_block
     assert_equal '<form action="#" method="post"></form>', ::HexletCode.form_for(@user) { |e| puts e }
   end
+
+  def test_form_for_with_input_field
+    user = User.new name: "rob", job: "hexlet"
+    expected_html = read_fixture("form_input.html").gsub("\n", "")
+
+    html = HexletCode.form_for user do |f|
+      f.input :name
+      f.input :job
+    end
+
+    assert_equal expected_html, html
+  end
+
+  def test_form_for_with_fields
+    user = User.new name: "rob", job: "hexlet"
+    expected_html = read_fixture("form_input_textarea.html").gsub("\n", "")
+
+    html = HexletCode.form_for user do |f|
+      f.input :name
+      f.input :job, as: :text
+    end
+
+    assert_equal expected_html, html
+  end
 end
