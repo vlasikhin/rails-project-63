@@ -15,11 +15,9 @@ module HexletCode
     def to_s
       content = @body ? @body.call : ""
 
-      if empty_tags.include?(@name)
-        "<#{@name}#{attributes}>"
-      else
-        "<#{@name}#{attributes}>#{content}</#{@name}>"
-      end
+      return "<#{@name}#{attributes}>" if empty_tags.include?(@name)
+
+      "<#{@name}#{attributes}>#{content}</#{@name}>"
     end
 
     private
