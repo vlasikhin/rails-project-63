@@ -22,7 +22,7 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_form_tag_with_block
-    assert_equal '<form action="#" method="post"></form>', ::HexletCode.form_for(@user) { |e| puts e }
+    assert_equal '<form action="#" method="post"></form>', ::HexletCode.form_for(@user) { "Wow" }
   end
 
   def test_form_for_with_input_field
@@ -30,7 +30,7 @@ class TestHexletCode < Minitest::Test
     expected_html = read_fixture("form_input.html").gsub("\n", "")
 
     html = HexletCode.form_for user do |f|
-      f.input :name
+      f.input :name, type: "text", class: "user-input"
       f.input :job
     end
 
@@ -49,13 +49,25 @@ class TestHexletCode < Minitest::Test
     assert_equal expected_html, html
   end
 
-  def test_form_for_with_submit
+  def test_form_for_submit
     user = User.new job: "hexlet"
     expected_html = read_fixture("form_input_submit.html").gsub("\n", "")
     html = HexletCode.form_for user do |f|
       f.input :name
       f.input :job
       f.submit
+    end
+
+    assert_equal expected_html, html
+  end
+
+  def test_form_for_custom_submit
+    user = User.new job: "hexlet"
+    expected_html = read_fixture("form_input_submit_with_custom_name.html").gsub("\n", "")
+    html = HexletCode.form_for user do |f|
+      f.input :name, type: "text", class: "user-input"
+      f.input :job
+      f.submit "Wow"
     end
 
     assert_equal expected_html, html

@@ -9,9 +9,10 @@ module HexletCode
   class Error < StandardError; end
 
   def self.form_for(object, options = {}, &)
-    url = options[:url] || "#"
-    builder = Builder.new(object)
-    fields = block_given? ? yield(builder) : []
-    Tag.build("form", action: url, method: "post") { fields&.join }
+    inputs = Builder.new(object)
+
+    yield inputs if block_given?
+
+    Tag.build("form", action: options[:url] || "#", method: "post") { inputs.fields&.join }
   end
 end

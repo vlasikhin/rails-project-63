@@ -15,18 +15,19 @@ module HexletCode
       value = object.public_send(name) unless object.nil?
 
       fields << label(name)
-      fields << if options[:as] == :text
-                  Tag.build("textarea", cols: 20, rows: 40, name:) { value }
+      fields << if options.delete(:as) == :text
+                  default_options = { cols: 20, rows: 40, name: }
+
+                  Tag.build("textarea", default_options.merge(options)) { value }
                 else
-                  Tag.build("input", name:, type: "text", value:)
+                  default_options = { name:, type: "text", value: }
+
+                  Tag.build("input", default_options.merge(options))
                 end
     end
 
-    def submit(**attrs)
-      value = attrs[:value] || "Save"
-      name  = attrs[:name] || "commit"
-
-      fields << Tag.build("input", name:, type: "submit", value:)
+    def submit(name = "Save")
+      fields << Tag.build("input", type: "submit", value: name)
     end
 
     def label(name)
