@@ -13,7 +13,7 @@ module HexletCode
     end
 
     def to_s
-      content = @body ? @body.call : ""
+      content = @body ? @body.call : ''
 
       return "<#{@name}#{attributes}>" if empty_tags.include?(@name)
 
@@ -23,7 +23,7 @@ module HexletCode
     private
 
     def attributes
-      return "" if @attributes.empty?
+      return '' if @attributes.empty?
 
       @attributes.map do |key, value|
         " #{key}=\"#{value}\""

@@ -11,27 +11,27 @@ module HexletCode
     end
 
     def input(name, options = {})
-      value = ""
+      value = ''
       value = object.public_send(name) unless object.nil?
 
       fields << label(name)
       fields << if options.delete(:as) == :text
                   default_options = { cols: 20, rows: 40, name: }
 
-                  Tag.build("textarea", default_options.merge(options)) { value }
+                  Tag.build('textarea', default_options.merge(options)) { value }
                 else
-                  default_options = { name:, type: "text", value: }
+                  default_options = { name:, type: 'text', value: }
 
-                  Tag.build("input", default_options.merge(options))
+                  Tag.build('input', default_options.merge(options))
                 end
     end
 
-    def submit(name = "Save")
-      fields << Tag.build("input", type: "submit", value: name)
+    def submit(name = 'Save')
+      fields << Tag.build('input', type: 'submit', value: name)
     end
 
     def label(name)
-      Tag.build("label", for: name) { name.capitalize }
+      Tag.build('label', for: name) { name.capitalize }
     end
   end
 end
