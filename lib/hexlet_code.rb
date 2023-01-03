@@ -3,16 +3,18 @@
 require_relative 'hexlet_code/version'
 
 module HexletCode
-  autoload(:Tag, 'hexlet_code/tag.rb')
-  autoload(:Builder, 'hexlet_code/builder.rb')
-
-  class Error < StandardError; end
+  autoload :Fields, 'hexlet_code/fields.rb'
+  autoload :Form, 'hexlet_code/form.rb'
+  autoload :FormBuilder, 'hexlet_code/form_builder.rb'
+  autoload :Inputs, 'hexlet_code/inputs.rb'
+  autoload :Tag, 'hexlet_code/tag.rb'
 
   def self.form_for(object, options = {}, &)
-    inputs = Builder.new(object)
+    form_options = {
+      action: options[:url] || '#',
+      method: options[:method] || 'post'
+    }
 
-    yield inputs if block_given?
-
-    Tag.build('form', action: options[:url] || '#', method: 'post') { inputs.fields&.join }
+    FormBuilder.new(object).build(form_options, &).render
   end
 end

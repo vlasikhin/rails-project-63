@@ -2,36 +2,19 @@
 
 module HexletCode
   class Tag
-    def self.build(name, attributes = {}, &)
-      new(name, attributes, &).to_s
-    end
+    SINGLE_TAGS = %w[br hr img meta input].freeze
 
-    def initialize(name, attributes = {}, &body)
-      @name = name
-      @attributes = attributes
-      @body = body
-    end
+    def self.build(tag_name, options = {}, &)
+      start_tag = if options.empty?
+                    "<#{tag_name}>"
+                  else
+                    "<#{tag_name} #{options.map { |key, value| "#{key}=\"#{value}\"" }.join(' ')}>"
+                  end
 
-    def to_s
-      content = @body ? @body.call : ''
+      content   = yield if block_given?
+      end_tag   = "</#{tag_name}>"
 
-      return "<#{@name}#{attributes}>" if empty_tags.include?(@name)
-
-      "<#{@name}#{attributes}>#{content}</#{@name}>"
-    end
-
-    private
-
-    def attributes
-      return '' if @attributes.empty?
-
-      @attributes.map do |key, value|
-        " #{key}=\"#{value}\""
-      end.join
-    end
-
-    def empty_tags
-      %w[br hr img meta input]
+      SINGLE_TAGS.include?(tag_name) ? start_tag : [start_tag, content, end_tag].compact.join
     end
   end
 end
