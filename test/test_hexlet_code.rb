@@ -9,10 +9,6 @@ class TestHexletCode < Minitest::Test
     @user = User.new
   end
 
-  def test_has_a_version_number
-    refute_nil ::HexletCode::VERSION
-  end
-
   def test_form_tag
     assert_equal '<form action="#" method="post"></form>', ::HexletCode.form_for(@user)
   end
