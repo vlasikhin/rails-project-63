@@ -8,7 +8,7 @@ module HexletCode
       start_tag = if options.empty?
                     "<#{tag_name}>"
                   else
-                    "<#{tag_name} #{options.map { |key, value| "#{key}=\"#{value}\"" }.join(" ")}>"
+                    "<#{tag_name} #{options.map { |key, value| "#{key}=\"#{value}\"" }.join('')}>"
                   end
 
       content   = yield if block_given?
