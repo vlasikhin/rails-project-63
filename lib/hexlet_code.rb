@@ -12,7 +12,7 @@ module HexletCode
     form_options = {
       action: options[:url] || '#',
       method: options[:method] || 'post'
-    }.merge(options.except(:url))
+    }.merge(options.except(:url, :method))
 
     FormBuilder.new(object).build(form_options, &).render
   end
