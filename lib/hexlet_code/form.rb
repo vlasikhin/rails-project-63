@@ -4,15 +4,15 @@ module HexletCode
   class Form
     def initialize(options = {})
       @options = options.dup
-      @component_options = []
+      @components = []
     end
 
     def add_component(options)
-      @component_options << options
+      @components << options
     end
 
     def render
-      tags = @component_options.map { |options| create_tag(options).render }
+      tags = @components.map { |options| create_tag(options).render }
 
       HexletCode::Tag.build('form', @options) { tags.join }
     end

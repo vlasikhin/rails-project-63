@@ -68,4 +68,16 @@ class TestHexletCode < Minitest::Test
 
     assert_equal expected_html, html
   end
+
+  def test_form_for_with_custom_options
+    user = User.new job: 'hexlet'
+    expected_html = read_fixture('form_with_custom_options.html').gsub("\n", '')
+    html = HexletCode.form_for user, class: 'custom-class' do |f|
+      f.input :name, type: 'text', class: 'user-input'
+      f.input :job
+      f.submit 'Wow'
+    end
+
+    assert_equal expected_html, html
+  end
 end
