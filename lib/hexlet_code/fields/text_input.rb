@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HexletCode
-  module Inputs
+  module Fields
     class TextInput
       DEFAULTS = {
         cols: 20,

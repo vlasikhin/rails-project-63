@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class TestTag < Minitest::Test
+class TestVersion < Minitest::Test
   def test_has_a_version_number
     refute_nil ::HexletCode::VERSION
   end

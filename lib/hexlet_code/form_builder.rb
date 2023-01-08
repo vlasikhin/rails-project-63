@@ -18,7 +18,7 @@ module HexletCode
       label(for: attribute_name)
 
       options = { as: :string }.merge(options)
-      options[:as] = "Inputs::#{options[:as].capitalize}Input"
+      options[:as] = "Fields::#{options[:as].capitalize}Input"
       options[:name] = attribute_name
       options[:value] = @object.public_send(attribute_name)
 
