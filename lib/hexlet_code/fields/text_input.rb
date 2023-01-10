@@ -8,8 +8,6 @@ module HexletCode
         rows: 40
       }.freeze
 
-      attr_reader :options
-
       def initialize(options)
         @value = options[:value]
         options = options.except(:value)

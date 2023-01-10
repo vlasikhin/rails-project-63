@@ -7,8 +7,6 @@ module HexletCode
         type: :text
       }.freeze
 
-      attr_reader :options
-
       def initialize(options)
         @options = DEFAULTS.merge(options)
       end
