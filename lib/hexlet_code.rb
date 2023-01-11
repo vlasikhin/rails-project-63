@@ -14,6 +14,8 @@ module HexletCode
       method: options[:method] || 'post'
     }.merge(options.except(:url, :method))
 
-    FormBuilder.new(object).build(form_options, &).render
+    builder = HexletCode::FormBuilder.new(object)
+    yield(builder) if block_given?
+    HexletCode::Form.new(form_options, builder.components).render
   end
 end

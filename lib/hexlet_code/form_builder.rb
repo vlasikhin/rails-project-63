@@ -2,16 +2,11 @@
 
 module HexletCode
   class FormBuilder
-    def initialize(associated_object)
+    attr_reader :components
+
+    def initialize(associated_object, components = [])
       @object = associated_object
-    end
-
-    def build(form_options = {})
-      @form = HexletCode::Form.new(form_options)
-
-      yield(self) if block_given?
-
-      @form
+      @components = components
     end
 
     def input(attribute_name, options = {})
@@ -22,7 +17,7 @@ module HexletCode
       options[:name] = attribute_name
       options[:value] = @object.public_send(attribute_name)
 
-      @form.add_component(options)
+      add_component(options)
     end
 
     def submit(name = 'Save', options = {})
@@ -32,14 +27,20 @@ module HexletCode
       options[:type] = :submit
       options[:as] = 'Fields::Submit'
 
-      @form.add_component(options)
+      add_component(options)
     end
 
     def label(options = {})
       options = options.dup
       options[:as] = 'Fields::Label'
 
-      @form.add_component(options)
+      add_component(options)
+    end
+
+    private
+
+    def add_component(options)
+      @components << options
     end
   end
 end

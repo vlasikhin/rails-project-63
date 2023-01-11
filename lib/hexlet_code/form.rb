@@ -2,13 +2,9 @@
 
 module HexletCode
   class Form
-    def initialize(options = {})
+    def initialize(options = {}, components = [])
       @options = options.dup
-      @components = []
-    end
-
-    def add_component(options)
-      @components << options
+      @components = components
     end
 
     def render
