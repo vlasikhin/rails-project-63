@@ -10,10 +10,7 @@ module HexletCode
     end
 
     def input(attribute_name, options = {})
-      label(for: attribute_name)
-
       options = { as: :string }.merge(options)
-      options[:as] = "Fields::#{options[:as].capitalize}Input"
       options[:name] = attribute_name
       options[:value] = @object.public_send(attribute_name)
 
@@ -25,14 +22,14 @@ module HexletCode
       options[:value] = name
       options[:name] = :commit
       options[:type] = :submit
-      options[:as] = 'Fields::Submit'
+      options[:as] = :submit
 
       add_component(options)
     end
 
     def label(options = {})
       options = options.dup
-      options[:as] = 'Fields::Label'
+      options[:as] = :label
 
       add_component(options)
     end

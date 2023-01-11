@@ -17,7 +17,8 @@ module HexletCode
 
     def create_tag(options)
       attributes = options.except(:as)
-      HexletCode.const_get(options[:as]).new(attributes)
+      field_class = "HexletCode::Fields::#{options[:as].capitalize}"
+      HexletCode.const_get(field_class).new(attributes)
     end
   end
 end

@@ -2,7 +2,7 @@
 
 module HexletCode
   module Fields
-    class TextInput
+    class Text
       DEFAULTS = {
         cols: 20,
         rows: 40
@@ -15,6 +15,14 @@ module HexletCode
       end
 
       def render
+        label + textarea
+      end
+
+      def label
+        HexletCode::Tag.build('label', for: @options[:name]) { @options[:name].capitalize }
+      end
+
+      def textarea
         HexletCode::Tag.build('textarea', @options) { @value }
       end
     end
