@@ -14,7 +14,7 @@ module HexletCode
       options[:name] = attribute_name
       options[:value] = @object.public_send(attribute_name)
 
-      add_component(options)
+      @components << options
     end
 
     def submit(name = 'Save', options = {})
@@ -24,19 +24,6 @@ module HexletCode
       options[:type] = :submit
       options[:as] = :submit
 
-      add_component(options)
-    end
-
-    def label(options = {})
-      options = options.dup
-      options[:as] = :label
-
-      add_component(options)
-    end
-
-    private
-
-    def add_component(options)
       @components << options
     end
   end
