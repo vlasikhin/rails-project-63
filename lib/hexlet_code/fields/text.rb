@@ -2,13 +2,14 @@
 
 module HexletCode
   module Fields
-    class Text
+    class Text < HexletCode::Fields::BaseInput
       DEFAULTS = {
         cols: 20,
         rows: 40
       }.freeze
 
       def initialize(options)
+        super
         @value = options[:value]
         options = options.except(:value)
         @options = DEFAULTS.merge(options)
@@ -16,10 +17,6 @@ module HexletCode
 
       def render
         label + textarea
-      end
-
-      def label
-        HexletCode::Tag.build('label', for: @options[:name]) { @options[:name].capitalize }
       end
 
       def textarea

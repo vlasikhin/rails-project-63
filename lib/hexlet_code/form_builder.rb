@@ -4,9 +4,9 @@ module HexletCode
   class FormBuilder
     attr_reader :components
 
-    def initialize(associated_object, components = [])
+    def initialize(associated_object)
       @object = associated_object
-      @components = components
+      @components = []
     end
 
     def input(attribute_name, options = {})
@@ -18,13 +18,7 @@ module HexletCode
     end
 
     def submit(name = 'Save', options = {})
-      options = options.dup
-      options[:value] = name
-      options[:name] = :commit
-      options[:type] = :submit
-      options[:as] = :submit
-
-      @components << options
+      @components << { value: name, name: :commit, type: :submit, as: :submit }.merge(options)
     end
   end
 end

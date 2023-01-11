@@ -2,21 +2,18 @@
 
 module HexletCode
   module Fields
-    class String
+    class String < HexletCode::Fields::BaseInput
       DEFAULTS = {
         type: :text
       }.freeze
 
       def initialize(options)
+        super
         @options = DEFAULTS.merge(options)
       end
 
       def render
         label + input
-      end
-
-      def label
-        HexletCode::Tag.build('label', for: @options[:name]) { @options[:name].capitalize }
       end
 
       def input

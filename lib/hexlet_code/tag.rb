@@ -5,7 +5,7 @@ module HexletCode
     SINGLE_TAGS = %w[br hr img meta input].freeze
 
     def self.build(tag_name, options = {}, &)
-      start_tag = "<#{tag_name}#{atrs(options)}>"
+      start_tag = "<#{tag_name}#{attrs(options)}>"
 
       return start_tag if SINGLE_TAGS.include?(tag_name)
 
@@ -15,7 +15,7 @@ module HexletCode
       [start_tag, content, end_tag].compact.join
     end
 
-    def self.atrs(options)
+    def self.attrs(options)
       return '' if options.empty?
 
       options.map { |key, value| " #{key}=\"#{value}\"" }.join
